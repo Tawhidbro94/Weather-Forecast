@@ -1,5 +1,4 @@
-// ===== Weather Forecast App =====
-// API: Open-Meteo (no API key needed)
+
 const GEO_URL = "https://geocoding-api.open-meteo.com/v1/search";
 const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
 
@@ -16,7 +15,6 @@ const WEATHER_CODES = {
   95: ["Thunderstorm", "⛈️"], 96: ["Thunderstorm, hail", "⛈️"], 99: ["Thunderstorm, hail", "⛈️"],
 };
 
-// ----- State -----
 const state = {
   unit: "C",          // "C" or "F"
   place: null,        // selected place object
@@ -25,7 +23,6 @@ const state = {
   favorites: [],      // array of place objects
 };
 
-// ----- DOM -----
 const $ = (id) => document.getElementById(id);
 const els = {
   form: $("searchForm"), input: $("searchInput"), suggestions: $("suggestions"),
@@ -37,7 +34,6 @@ const els = {
   unitC: $("unitC"), unitF: $("unitF"),
 };
 
-// ----- Local Storage helpers (safe) -----
 function save(key, value) {
   try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* ignore */ }
 }
@@ -48,7 +44,6 @@ function load(key, fallback) {
   } catch (e) { return fallback; }
 }
 
-// ----- Helpers -----
 const samePlace = (a, b) =>
   Math.abs(a.latitude - b.latitude) < 0.01 && Math.abs(a.longitude - b.longitude) < 0.01;
 
@@ -70,7 +65,6 @@ async function fetchJSON(url) {
   return res.json();
 }
 
-// ----- Search (geocoding) -----
 async function searchCity(query) {
   els.suggestions.hidden = true;
   showStatus("loading", "Searching cities...");
@@ -105,7 +99,6 @@ function renderSuggestions(results) {
   els.suggestions.hidden = false;
 }
 
-// ----- Weather (forecast API) -----
 async function selectPlace(place) {
   state.place = place;
   save("weather.lastPlace", place);
@@ -124,7 +117,6 @@ async function selectPlace(place) {
   }
 }
 
-// ----- Rendering -----
 function renderWeather() {
   if (!state.data || !state.place) return;
   const cur = state.data.current;
@@ -176,7 +168,6 @@ function renderForecast() {
   });
 }
 
-// ----- Favorites (localStorage) -----
 function renderFavorites() {
   els.favorites.innerHTML = "";
   if (state.favorites.length === 0) {
@@ -230,7 +221,6 @@ function toggleFavorite() {
   updateFavButton();
 }
 
-// ----- Unit toggle -----
 function setUnit(unit) {
   state.unit = unit;
   save("weather.unit", unit);
@@ -239,7 +229,6 @@ function setUnit(unit) {
   renderWeather();
 }
 
-// ----- Event listeners -----
 els.form.addEventListener("submit", (e) => {
   e.preventDefault();
   const q = els.input.value.trim();
@@ -256,7 +245,6 @@ document.querySelectorAll(".filter").forEach((btn) => {
   });
 });
 
-// ----- Init -----
 (function init() {
   state.favorites = load("weather.favorites", []);
   state.unit = load("weather.unit", "C");
