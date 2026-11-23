@@ -4,7 +4,6 @@ const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
 
 const DEFAULT_PLACE = { name: "Chattogram", country: "Bangladesh", latitude: 22.3569, longitude: 91.7832 };
 
-// weather code -> [description, emoji]
 const WEATHER_CODES = {
   0: ["Clear sky", "☀️"], 1: ["Mainly clear", "🌤️"], 2: ["Partly cloudy", "⛅"], 3: ["Overcast", "☁️"],
   45: ["Fog", "🌫️"], 48: ["Rime fog", "🌫️"],
@@ -16,11 +15,11 @@ const WEATHER_CODES = {
 };
 
 const state = {
-  unit: "C",          // "C" or "F"
-  place: null,        // selected place object
-  data: null,         // raw API data (always Celsius, km/h)
-  filter: "all",      // all | rainy | dry
-  favorites: [],      // array of place objects
+  unit: "C",         
+  place: null,        
+  data: null,         
+  filter: "all",    
+  favorites: [],      
 };
 
 const $ = (id) => document.getElementById(id);
