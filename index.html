@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Forecast</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>🌤️ Weather Forecast</h1>
+      <div class="unit-toggle" role="group" aria-label="Temperature unit">
+        <button id="unitC" class="unit active" type="button">°C</button>
+        <button id="unitF" class="unit" type="button">°F</button>
+      </div>
+    </header>
+
+    <form id="searchForm" class="search" autocomplete="off">
+      <input id="searchInput" type="text" placeholder="Search city (e.g. Chittagong, London)" required />
+      <button type="submit">Search</button>
+    </form>
+
+    <section id="suggestions" class="suggestions" hidden></section>
+
+    <section class="favorites">
+      <h2>⭐ Saved cities</h2>
+      <div id="favorites" class="chips"></div>
+    </section>
+
+    <section id="status" class="status" hidden></section>
+
+    <section id="weather" hidden>
+      <div class="current card">
+        <div class="current-head">
+          <div>
+            <h2 id="placeName"></h2>
+            <p id="placeMeta" class="muted"></p>
+          </div>
+          <button id="favBtn" class="fav-btn" type="button">☆ Save</button>
+        </div>
+        <div class="current-main">
+          <span id="curIcon" class="big-icon"></span>
+          <div>
+            <div id="curTemp" class="big-temp"></div>
+            <div id="curDesc" class="muted"></div>
+          </div>
+        </div>
+        <ul class="details">
+          <li>Feels like <strong id="curFeels"></strong></li>
+          <li>Humidity <strong id="curHumidity"></strong></li>
+          <li>Wind <strong id="curWind"></strong></li>
+        </ul>
+      </div>
+
+      <div class="forecast-head">
+        <h2>7-day forecast</h2>
+        <div class="filters" role="group" aria-label="Filter forecast">
+          <button class="filter active" data-filter="all" type="button">All</button>
+          <button class="filter" data-filter="rainy" type="button">Rainy</button>
+          <button class="filter" data-filter="dry" type="button">Dry</button>
+        </div>
+      </div>
+      <div id="forecast" class="forecast"></div>
+      <p id="forecastEmpty" class="status" hidden>No days match this filter.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
